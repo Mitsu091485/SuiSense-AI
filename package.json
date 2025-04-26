@@ -1,0 +1,9 @@
+
+{
+  "name": "suisense-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@mysten/sui.js": "^0.52.0"
+  }
+}

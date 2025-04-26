@@ -1,7 +1,0 @@
-/SuiSenseAI
-  /api
-  App.js
-  NFTMetadata.js
-  SendTransaction.js
-  package.json
-  vercel.json

@@ -7,3 +7,6 @@ export default function Home() {
     </div>
   );
 }
+git add app/page.tsx
+git commit -m "Add homepage to fix Vercel 404"
+git push

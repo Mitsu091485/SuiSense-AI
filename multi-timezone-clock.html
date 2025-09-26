@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Timezone Digital Clock</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #232946;
+      color: #fffffe;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .clock-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .clock {
+      background: #393e6a;
+      border-radius: 12px;
+      padding: 28px 40px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+      text-align: center;
+      min-width: 220px;
+    }
+    .city {
+      font-size: 1.3em;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      color: #eebbc3;
+    }
+    .time {
+      font-size: 2.3em;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 2px;
+    }
+    .date {
+      margin-top: 8px;
+      font-size: 1em;
+      color: #b8c1ec;
+    }
+  </style>
+</head>
+<body>
+  <h1>Multi-Timezone Digital Clock</h1>
+  <div class="clock-container" id="clockContainer"></div>
+  <script>
+    // List of time zones and city labels
+    const timeZones = [
+      { city: 'UTC', tz: 'UTC' },
+      { city: 'New York', tz: 'America/New_York' },
+      { city: 'London', tz: 'Europe/London' },
+      { city: 'Tokyo', tz: 'Asia/Tokyo' },
+      { city: 'Sydney', tz: 'Australia/Sydney' }
+    ];
+
+    function renderClocks() {
+      const container = document.getElementById('clockContainer');
+      container.innerHTML = '';
+      timeZones.forEach(({city, tz}) => {
+        const now = new Date();
+        const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: tz };
+        const timeString = now.toLocaleTimeString('en-US', options);
+        const dateString = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: tz });
+        const clockDiv = document.createElement('div');
+        clockDiv.className = 'clock';
+        clockDiv.innerHTML = `
+          <div class="city">${city}</div>
+          <div class="time">${timeString}</div>
+          <div class="date">${dateString}</div>
+        `;
+        container.appendChild(clockDiv);
+      });
+    }
+
+    renderClocks();
+    setInterval(renderClocks, 1000);
+  </script>
+</body>
+</html>

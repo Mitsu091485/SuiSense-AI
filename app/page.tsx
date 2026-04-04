@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 const ParticleAnimation = () => {
   useEffect(() => {
-    const canvas = document.getElementById('particle-canvas');
+    const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
 
     // Set canvas size
@@ -28,6 +28,7 @@ const ParticleAnimation = () => {
     }
 
     // Animate particles
+    let animationFrameId: number;
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(particle => {
@@ -43,13 +44,13 @@ const ParticleAnimation = () => {
         if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
         if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
       });
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
     // Cleanup
     return () => {
-      cancelAnimationFrame(animate);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
